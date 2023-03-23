@@ -1,0 +1,43 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.App {
+  padding:2rem;
+  background-color: rgb(220, 244, 244);
+  border-radius: 10px;
+}
+
+.converter {
+  display: flex;
+  gap:1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.converter textarea, .converter input {
+  padding: 10px;
+  border-radius: 8px;
+
+}
+
+.converter img {
+  width:60px;
+  background-color: rgb(235, 253, 254);
+  border-radius: 10px;
+  transition: 200ms;
+}
+.converter img:hover {
+  transform: scale(1.08);
+  cursor: pointer;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
