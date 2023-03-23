@@ -6,23 +6,26 @@ import { Routes, Route, NavLink } from 'react-router-dom'
 import DateToUnix from './DateToUnix'
 import UnixToDate from './UnixToDate'
 import Snackbar from '@mui/material/Snackbar'
+import { converterAPI } from './API'
 
 function App() {
   const [count, setCount] = useState(0)
 
   const [snackbarOpen, setSnackbarOpen] = useState(false)
 
-  const dateToUnix = (dateString:string) => {
-    const date = new Date(dateString);
-    const unixTimestamp = date.getTime() / 1000;
-    return unixTimestamp
+  const dateToUnix = async(dateString:string) => {
+    const response = await converterAPI.dateToUnix(dateString);
+    if (response.data.status === 'OK') {
+      return response.data.unix;
+    }
   }
 
 
-  const unixToDate = (unixTimestamp:number) => {
-    const ms = unixTimestamp * 1000;
-    const date = new Date(ms);
-    return date;
+  const unixToDate = async(unixTimestamp:number) => {
+    const response = await converterAPI.unixToDate(unixTimestamp)
+    if (response.data.status === 'OK') {
+      return response.data.date;
+    }
   }
 
   const handleCopy = (result:string|number|Date) => {
