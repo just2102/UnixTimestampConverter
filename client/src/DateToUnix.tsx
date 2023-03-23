@@ -1,12 +1,14 @@
 import { useState } from "react";
 import copyIcon from "./assets/copy.svg";
+import Preloader from "./Preloader";
 
 interface Props {
   dateToUnix: (dateString: string) => any;
   handleCopy: (result: number) => void;
+  isConverting: boolean;
 }
 
-const DateToUnix = ({ dateToUnix, handleCopy }: Props) => {
+const DateToUnix = ({ dateToUnix, handleCopy, isConverting }: Props) => {
   const [dateString, setDateString] = useState<string | null>(null);
   const [convertedUnix, setConvertedUnix] = useState<number | null>(null);
 
@@ -30,6 +32,7 @@ const DateToUnix = ({ dateToUnix, handleCopy }: Props) => {
       <button onClick={onConvert}>Convert</button>
 
       <div className="result">
+        {isConverting && <Preloader />}
         {convertedUnix}
         {convertedUnix && (
           <img

@@ -1,11 +1,14 @@
 {
   "name": "unixtimestampconverter",
+  "homepage": "https://https://github.com/just2102/UnixTimestampConverter/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -13,6 +16,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.14",
     "axios": "^1.3.4",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0"

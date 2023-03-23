@@ -12,20 +12,25 @@ function App() {
   const [count, setCount] = useState(0)
 
   const [snackbarOpen, setSnackbarOpen] = useState(false)
+  const [isConverting, setIsConverting] = useState(false);
 
   const dateToUnix = async(dateString:string) => {
+    setIsConverting(true)
     const response = await converterAPI.dateToUnix(dateString);
     if (response.data.status === 'OK') {
+      setIsConverting(false)
       return response.data.unix;
-    }
+    } else setIsConverting(false)
   }
 
 
   const unixToDate = async(unixTimestamp:number) => {
+    setIsConverting(true)
     const response = await converterAPI.unixToDate(unixTimestamp)
     if (response.data.status === 'OK') {
+      setIsConverting(false)
       return response.data.date;
-    }
+    } else setIsConverting(false)
   }
 
   const handleCopy = (result:string|number|Date) => {
@@ -46,9 +51,11 @@ function App() {
         <NavLink to={"/unixToDate"}><button>Unix → Date</button></NavLink>
       </div>
       <Routes>
-        <Route path='/dateToUnix' element={<DateToUnix handleCopy={handleCopy} dateToUnix={dateToUnix}/>}></Route>
+        <Route path='/dateToUnix' 
+        element={<DateToUnix isConverting={isConverting} handleCopy={handleCopy} dateToUnix={dateToUnix}/>}></Route>
 
-        <Route path='/unixToDate' element={<UnixToDate handleCopy={handleCopy} unixToDate={unixToDate}/>}></Route>
+        <Route path='/unixToDate' 
+        element={<UnixToDate isConverting={isConverting} handleCopy={handleCopy} unixToDate={unixToDate}/>}></Route>
       </Routes>
     </div>
   )
